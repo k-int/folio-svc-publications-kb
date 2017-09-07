@@ -1,0 +1,10 @@
+import pubskb.Instance
+
+model {
+      Instance instance
+}
+
+json {
+  id instance.id
+  title instance.title
+}
