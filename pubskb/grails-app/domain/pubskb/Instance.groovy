@@ -4,6 +4,7 @@ class Instance {
 
   Work work
   String title
+  RefdataValue itemType // BKM-Books and monographs / JOU-Journals / etc
 
   static constraints = {
      work (nullable:false, blank:false)
