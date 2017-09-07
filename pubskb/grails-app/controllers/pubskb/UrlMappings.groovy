@@ -24,6 +24,7 @@ class UrlMappings {
         '/instances'(resources: 'instance') {
           collection {
             '/search'(controller: 'instance', action: 'search')
+            '/resolve'(controller: 'instance', action: 'resolve')
           }
         }
     }

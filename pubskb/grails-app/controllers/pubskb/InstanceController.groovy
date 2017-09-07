@@ -24,4 +24,12 @@ class InstanceController extends RestfulController {
     }
   }
 
+  /**
+   * Resolve a json document describing an instance. If the document matches an instance already
+   * in the KB, return the item, otherwise create a new item and return that.
+   */
+  def resolve() {
+    log.debug("resolve");
+    respond([title:'Decision and Control'], status: 200)
+  }
 }

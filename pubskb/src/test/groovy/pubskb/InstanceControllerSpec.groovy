@@ -6,6 +6,8 @@ import grails.test.hibernate.HibernateSpec
 
 class InstanceControllerSpec extends HibernateSpec implements ControllerUnitTest<InstanceController> {
 
+  static decision_and_control = [ title: 'Decision and Control', author: 'Beer, Stafford', identifiers: [ isbn:'1234-5678' ] ]
+
   static doWithSpring = {
         jsonSmartViewResolver(JsonViewResolver)
   }
@@ -28,5 +30,15 @@ class InstanceControllerSpec extends HibernateSpec implements ControllerUnitTest
     then: 'The response is correct'
       response.json.size() == 1
       response.json[0].title == 'Brain of the Firm'
+  }
+
+  void 'test the resolve function'() {
+    when: 'An item not already known in the KB is resolved'
+      request.method='POST'
+      request.json=decision_and_control
+      controller.resolve()
+
+    then:
+      response.json.title=='Decision and Control'
   }
 }
