@@ -9,6 +9,7 @@ class Instance {
   static constraints = {
      work (nullable:true, blank:false)
      title (nullable:false, blank:false)
+     itemType (nullable:true, blank:false)
   }
 
   static hasMany = [

@@ -11,8 +11,4 @@ class InstanceIdentifierSpec extends Specification implements DomainUnitTest<Ins
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

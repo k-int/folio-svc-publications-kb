@@ -10,9 +10,4 @@ class InstanceIdentifierErratumSpec extends Specification implements DomainUnitT
 
     def cleanup() {
     }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

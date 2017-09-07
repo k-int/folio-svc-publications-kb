@@ -11,8 +11,4 @@ class IdentifierNamespaceSpec extends Specification implements DomainUnitTest<Id
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

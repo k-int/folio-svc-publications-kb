@@ -11,8 +11,4 @@ class InstanceSpec extends Specification implements DomainUnitTest<Instance> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

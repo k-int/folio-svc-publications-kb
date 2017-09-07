@@ -40,10 +40,6 @@ class RefdataValue {
       if ( obj instanceof RefdataValue ) {
         return obj.id == id
       }
-      else if ( obj instanceof HibernateProxy ) {
-        Object dep_obj = KBComponent.deproxy (obj)
-        return dep_obj.id == id
-      }
     }
 
     return false

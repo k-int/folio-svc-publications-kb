@@ -11,8 +11,4 @@ class WorkSpec extends Specification implements DomainUnitTest<Work> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }
