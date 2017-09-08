@@ -1,0 +1,12 @@
+{
+  "title":"Concurrent Programming in Java, Second Edition",
+  "identifiers":[
+    { "namespace":"isxn", "value":"0-201-31009-0" }
+  ],
+  "publisher":{
+    "name":"Addison Wesley"
+  },
+  "author":{
+    "name":"Lea, Doug"
+  }
+}
