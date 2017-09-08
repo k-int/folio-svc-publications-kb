@@ -41,6 +41,9 @@ class InstanceController extends RestfulController {
     else if ( ( request.JSON?.identifiers == null ) || ( request.JSON?.identifiers?.size() == 0 ) ) {
       render(status:400, text:'Record contains no identifiers, cannot contine')
     }
+    else if ( request.JSON.identifiers instanceof Map ) {
+      throw new RuntimeException("resolve requires an instance description with a list of identifiers. You have provided a map. Do you need to wrap your single identifier in a JSON array?");
+    }
     else {
       // Attempt to locate based on the identifier and namespace. We OR together all the identifiers. If we match a single instance
       // we are in good shape (And might have discovered additional identifiers for that item). If we match multiple, we are in bad
@@ -118,11 +121,16 @@ class InstanceController extends RestfulController {
 
       def result = null;
 
+      if ( work_record.identifiers instanceof Map ) {
+        throw new RuntimeException("lookupOrCreateWork requires a work with a list of identifiers. You have provided a map. Do you need to wrap your map in a list?");
+      }
+
       def work_query_sw = new StringWriter();
       def work_params = [:]
       def identifier_counter = 0;
       work_query_sw.write('select w from Work as w where exists ( select id from WorkIdentifier as id where id.work = w AND ( ');
       work_record.identifiers.each { source_rec_identifier ->
+
         if ( ( source_rec_identifier.get('namespace') == null ) || ( source_rec_identifier.get('value') == null ) ) {
           throw new RuntimeException("Record contains an identifier without namespace or value: ${source_rec_identifier}");
         }
