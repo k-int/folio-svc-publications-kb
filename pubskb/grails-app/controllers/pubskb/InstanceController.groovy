@@ -16,13 +16,14 @@ class InstanceController extends RestfulController {
     log.debug("Search: ${q}");
 
     if (q) {
-        def query = Instance.where { 
-          title ==~ "%${q}%"
-        }
-        respond query.list(max: Math.min( max ?: 10, 100)) 
+      def query = Instance.where { 
+        title ==~ "%${q}%"
+      }
+      respond query.list(max: Math.min( max ?: 10, 100)) 
     }
     else {
-        respond([]) 
+      log.debug("No query - responding with empty list");
+      respond([]) 
     }
   }
 
