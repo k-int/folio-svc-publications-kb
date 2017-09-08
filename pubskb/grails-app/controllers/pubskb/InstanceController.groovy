@@ -93,6 +93,11 @@ class InstanceController extends RestfulController {
 
     // New instance, set scalar props
     def new_instance = new Instance(title: instance_record.title);
+
+    if ( instance_record.work != null ) {
+     new_instance.work = lookupOrCreateWork(instance_record.work)
+    }
+
     new_instance.save(flush:true, failOnError:true)
 
     // Add in any identifiers
@@ -107,5 +112,58 @@ class InstanceController extends RestfulController {
 
     // Return
     new_instance
+  }
+
+  private def lookupOrCreateWork(work_record) {
+
+      def result = null;
+
+      def work_query_sw = new StringWriter();
+      def work_params = [:]
+      def identifier_counter = 0;
+      work_query_sw.write('select w from Work as w where exists ( select id from WorkIdentifier as id where id.work = i AND ( ');
+      work_record.identifiers.each { source_rec_identifier ->
+        if ( ( source_rec_identifier.get('namespace') == null ) || ( source_rec_identifier.get('value') == null ) ) {
+          throw new RuntimeException("Record contains an identifier without namespace or value: ${source_rec_identifier}");
+        }
+
+        if ( identifier_counter > 0 ) {
+          work_query_sw.write ( ' OR ' );
+        }
+
+        work_query_sw.write("( id.namespace.nsIdentifier = :ns_${identifier_counter} AND id.value = :id_${identifier_counter} ) ");
+        work_params['ns_'+identifier_counter] = source_rec_identifier.namespace
+        work_params['id_'+identifier_counter] = source_rec_identifier.value
+        identifier_counter++;
+      }
+      work_query_sw.write(') ) ');
+
+      def work_query = work_query_sw.toString();
+
+      log.debug("Look up works by ID : ${work_query} ${work_params}");
+
+      def matched_works = Instance.executeQuery(work_query,work_params);
+
+      switch ( matched_works.size() ) {
+        case 0:
+          log.debug("Matched no existing works -- create");
+          result = createWork(work_record);
+          break;
+        case 1:
+          log.debug("Matched one existing work -- enrich");
+          result = matched_works.get(0);
+          break;
+        default:
+          log.debug("Matched mutiple existing work -- error");
+          throw new RuntimeException("Matched multiple work records. Cannot continue");
+          break;
+      }
+
+    result
+  }
+
+  private def createWork(work_record) {
+    def result = null;
+    result
   }
 }
