@@ -7,9 +7,9 @@ class Instance {
   RefdataValue itemType // BKM-Books and monographs / SER - Series / etc
 
   static constraints = {
-     work (nullable:true, blank:false)
+     work (nullable:true);
      title (nullable:false, blank:false)
-     itemType (nullable:true, blank:false)
+     itemType (nullable:true);
   }
 
   static hasMany = [

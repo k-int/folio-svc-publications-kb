@@ -22,8 +22,19 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
+
+
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
+
+    logger ('grails.app.init', DEBUG)
+    logger ('grails.app.controllers', DEBUG)
+    logger ('grails.app.domains', DEBUG)
+    logger ('grails.app.jobs', DEBUG)
+    logger ('grails.app.services', DEBUG)
+    logger ('com.k_int', DEBUG)
+    logger ('pubskb', DEBUG)
+
     appender("FULL_STACKTRACE", FileAppender) {
         file = "${targetDir}/stacktrace.log"
         append = true
@@ -32,5 +43,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
         }
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+    root(WARN, ['STDOUT', 'FULL_STACKTRACE'])
 }
-root(ERROR, ['STDOUT'])
+else {
+  root(ERROR, ['STDOUT'])
+}

@@ -7,8 +7,8 @@ class InstanceIdentifier {
   String value
 
   static constraints = {
-    instance (nullable:false, blank:false)
-    namespace (nullable:false, blank:false)
+    instance (nullable:false)
+    namespace (nullable:false)
     value (nullable:false, blank:false)
   }
 }

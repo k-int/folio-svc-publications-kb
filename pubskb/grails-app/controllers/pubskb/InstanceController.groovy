@@ -12,6 +12,9 @@ class InstanceController extends RestfulController {
   }
 
   def search(String q, Integer max) { 
+
+    log.debug("Search: ${q}");
+
     if (q) {
         def query = Instance.where { 
           title ==~ "%${q}%"

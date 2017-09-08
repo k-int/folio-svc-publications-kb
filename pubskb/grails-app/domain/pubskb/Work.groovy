@@ -2,6 +2,9 @@ package pubskb
 
 class Work {
 
-    static constraints = {
-    }
+  String title
+
+  static constraints = {
+    title(nullable:true, blank:false);
+  }
 }
