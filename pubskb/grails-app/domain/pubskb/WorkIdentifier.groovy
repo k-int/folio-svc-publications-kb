@@ -9,6 +9,6 @@ class WorkIdentifier {
   static constraints = {
     work (nullable:false)
     namespace (nullable:false)
-    value (nullable:false, blank:false)
+    value (nullable:false, blank:false, unique:['namespace'])
   }
 }

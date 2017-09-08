@@ -163,7 +163,19 @@ class InstanceController extends RestfulController {
   }
 
   private def createWork(work_record) {
-    def result = null;
+    def result = new Work(title:work_record.title);
+    result.save(flush:true, failOnError:true);
+
+    // Add in any identifiers
+    work_record.identifiers.each { id ->
+       // For now, we create namespaces if we don't recognise them -- maybe this should be more controlled however
+       def namespace = IdentifierNamespace.findByNsIdentifier(id.namespace) ?: new IdentifierNamespace(nsIdentifier:id.namespace).save(flush:true, failOnError:true);
+       def new_work_identifier = new WorkIdentifier(namespace:namespace, value:id.value, work:result).save(flush:true, failOnError:true);
+    }
+
+    // Refresh
+    result.refresh();
+
     result
   }
 }

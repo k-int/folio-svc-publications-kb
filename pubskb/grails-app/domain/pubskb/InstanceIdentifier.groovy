@@ -9,6 +9,6 @@ class InstanceIdentifier {
   static constraints = {
     instance (nullable:false)
     namespace (nullable:false)
-    value (nullable:false, blank:false)
+    value (nullable:false, blank:false, unique:['namespace'])
   }
 }
