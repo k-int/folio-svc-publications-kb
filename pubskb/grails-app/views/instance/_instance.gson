@@ -5,6 +5,7 @@ model {
 }
 
 json {
+  wibble 'a cheeky test'
   id instance.id
   title instance.title
 }

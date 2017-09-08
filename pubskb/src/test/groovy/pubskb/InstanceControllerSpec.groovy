@@ -6,7 +6,8 @@ import grails.test.hibernate.HibernateSpec
 
 class InstanceControllerSpec extends HibernateSpec implements ControllerUnitTest<InstanceController> {
 
-  static decision_and_control = [ title: 'Decision and Control', author: 'Beer, Stafford', identifiers: [ isbn:'1234-5678' ] ]
+  static no_identifier_record = [ title: 'Decision and Control' ];
+  static decision_and_control = [ title: 'Decision and Control', author: 'Beer, Stafford', identifiers: [ [ namespace:'isxn', value:'1234-5678' ] ] ]
 
   static doWithSpring = {
         jsonSmartViewResolver(JsonViewResolver)
@@ -30,6 +31,16 @@ class InstanceControllerSpec extends HibernateSpec implements ControllerUnitTest
     then: 'The response is correct'
       response.json.size() == 1
       response.json[0].title == 'Brain of the Firm'
+  }
+
+  void 'test the resolve function - No identifier path'() {
+    when: 'A Request containing no identifiers is passed to the resolve function'
+      request.method='POST'
+      request.json=no_identifier_record
+      controller.resolve()
+
+    then:
+      response.status==400
   }
 
   void 'test the resolve function'() {

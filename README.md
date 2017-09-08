@@ -24,33 +24,33 @@ This makes the dependent service entirely self contained, and allows local testi
 The fundamental back-end purpose of this microservice then is to publish an event stream of publications data which any dependent microservice can consume.
 
 # The publications JSON document (In it's full form)
-
-{
-  title: 'the authoritative title'
-  variantTitles: [
-    { title:'Authoritative Title' },
-    { title:'Authoritative Title (the)' }
-  ],
-  publisher: {
-    name:'A Publisher Name',
-    identifiers:[
-      {namespace:'isni', '897897324'}
-    ]
-  }
-  identifiers:[
-    { namespace:'isxn', value:'1345-5674' },
-    { namespace:'isxn', value:'1345-5474' }
-  ],
-  work:{
-    title:'the authoritiative title',                                  // Optional
-    identifiers:[
-      { namespace:'isxn', value:'1345-5674' }                          // This would be an ISSN-L (For example)
-      { namespace:'GUID', value:'1345-5674-44323-35343-4353' }         // Allow local GUIDS for explicit linking
-    ]
-  }
-
-}
-
+    
+    {
+      title: 'the authoritative title'
+      variantTitles: [
+        { title:'Authoritative Title' },
+        { title:'Authoritative Title (the)' }
+      ],
+      publisher: {
+        name:'A Publisher Name',
+        identifiers:[
+          {namespace:'isni', '897897324'}
+        ]
+      }
+      identifiers:[
+        { namespace:'isxn', value:'1345-5674' },
+        { namespace:'isxn', value:'1345-5474' }
+      ],
+      work:{
+        title:'the authoritiative title',                                  // Optional
+        identifiers:[
+          { namespace:'isxn', value:'1345-5674' }                          // This would be an ISSN-L (For example)
+          { namespace:'GUID', value:'1345-5674-44323-35343-4353' }         // Allow local GUIDS for explicit linking
+        ]
+      }
+    
+    }
+    
 ## Important notes
 
 Instances with different ISSNs are different instances in the service. Instances linked by virtue of an ISSN-L are linked via work.
