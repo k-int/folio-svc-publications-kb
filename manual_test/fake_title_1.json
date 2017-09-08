@@ -1,0 +1,15 @@
+{
+  "title":"Fake Title 1, First Edition",
+  "identifiers":[
+    { "namespace":"uuid", "value":"cfc979e1-0b69-4e76-a762-82232fc9f0d5" }
+  ],
+  "publisher":{
+    "name":"Ian"
+  },
+  "work":{
+    "title":"Fake Title 1",
+    "identifiers":[
+        { "namespace":"uuid", "value":"cfc979e1-0b69-4e76-a762-82232fc9f0d5" }
+    ]
+  }
+}

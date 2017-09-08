@@ -121,7 +121,7 @@ class InstanceController extends RestfulController {
       def work_query_sw = new StringWriter();
       def work_params = [:]
       def identifier_counter = 0;
-      work_query_sw.write('select w from Work as w where exists ( select id from WorkIdentifier as id where id.work = i AND ( ');
+      work_query_sw.write('select w from Work as w where exists ( select id from WorkIdentifier as id where id.work = w AND ( ');
       work_record.identifiers.each { source_rec_identifier ->
         if ( ( source_rec_identifier.get('namespace') == null ) || ( source_rec_identifier.get('value') == null ) ) {
           throw new RuntimeException("Record contains an identifier without namespace or value: ${source_rec_identifier}");
