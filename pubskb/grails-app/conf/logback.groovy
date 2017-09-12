@@ -25,7 +25,7 @@ appender('STDOUT', ConsoleAppender) {
 
 
 def targetDir = BuildSettings.TARGET_DIR
-if ( ( Environment.isDevelopmentMode() || 1==2) && targetDir != null) {
+if ( ( Environment.isDevelopmentMode() || Environment.current == Environment.TEST ) && targetDir != null) {
 
     logger ('grails.app.init', DEBUG)
     logger ('grails.app.controllers', DEBUG)
